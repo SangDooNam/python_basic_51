@@ -21,7 +21,7 @@
 # import datetime
 
 
-# def isweekend(date):
+# def isweekend(date = datetime.datetime.now()):
     
 #     if date.weekday() == 5 or date.weekday() == 6:
 #         return True
@@ -81,10 +81,19 @@
 # ]
 
 # def get_user(p_username, p_password):
+    
+#     result = None
+    
 #     for user in users:
 #         if (p_username, p_password) == (user['name'], user['password']):
-#             return user
-#     return None
+#             result = user
+#             return result
+#     print('An error occurred. You are not authorized.')
+#     return result
+
+
+
+#------------------------------------------------------------
 
 # def get_user(p_username, p_password):
 #     for user in users:
@@ -94,10 +103,12 @@
 #         else:
 #             get_user(user['name'], user['password'])
 
-# user = get_user(username, password)
+
 
 # if not user:
 #     print("An error occurred. You are not authorized.")
+
+# user = get_user(username, password)
 
 
 """Task 5"""
@@ -124,14 +135,27 @@ users = [
         "password": "joplin"
     }
 ]
+def get_user(p_username, p_password):
+    
+    result = None
+    
+    for user in users:
+        if (p_username, p_password) == (user['name'], user['password']):
+            result = user
+            return result
+    # print('An error occurred. You are not authorized.')
+    return result
 
 def show_offers(p_username, p_password):
-    for user in users:
-        if (p_username, p_password) == (user['name'], user['password']) and user['type'] == 'Teacher':
-            
-            return
+    
+    # if (get_user(p_username, p_password) and get_user(p_username, p_password)['type'] == 'Student') or get_user(p_username, p_password) is None:
         
-    print('We have great courses to offer you!')
+    #     print('We have great courses to offer you!')
+    user = get_user(p_username, p_password)
+    
+    if (user and user['type'] == 'Student') or not user:
+        print('We have great courses to offer you!')
+    
     
     
     
